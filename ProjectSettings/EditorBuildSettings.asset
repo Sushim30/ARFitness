@@ -59,6 +59,27 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Front_Raise.unity
     guid: 53597b38ab6e446458420347cc16a1fa
+  - enabled: 1
+    path: Assets/Scenes/ArdhaUttasana.unity
+    guid: 2bca652be57bfdc418c7d25d2f894333
+  - enabled: 1
+    path: Assets/Scenes/naukasana.unity
+    guid: f8d52a7f70f1b504bb9a2dec1f2a8142
+  - enabled: 1
+    path: Assets/Scenes/StandingNamaste.unity
+    guid: c720760dce39d3f489b8d968c16a5440
+  - enabled: 1
+    path: Assets/Scenes/SuryaNamaskar.unity
+    guid: 6ee3f08913448b04d8fda2d5bede5a81
+  - enabled: 1
+    path: Assets/Scenes/Trikonasana.unity
+    guid: 4024eafe6722d344ea726152eeed2762
+  - enabled: 1
+    path: Assets/Scenes/UrdhavaDhanurasana.unity
+    guid: 6e73cfe3b53211d4fb87551824aa11f0
+  - enabled: 1
+    path: Assets/Scenes/Yoga.unity
+    guid: 3f7969cb09c80bb4d9731f4635c07dbf
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 6ee72d15cf39dd748a13eac57397b9af,
       type: 2}
