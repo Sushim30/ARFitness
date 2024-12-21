@@ -72,6 +72,30 @@ EditorBuildSettings:
     path: Assets/Scenes/SuryaNamaskar.unity
     guid: 6ee3f08913448b04d8fda2d5bede5a81
   - enabled: 1
+    path: Assets/Scenes/Issue/BackPain.unity
+    guid: 715aebe409e967a4883fe586598966f3
+  - enabled: 1
+    path: Assets/Scenes/Issue/Knee Pain.unity
+    guid: 79754229b62f9ff4a8a62863624279c1
+  - enabled: 1
+    path: Assets/Scenes/Issue/Low EnergyFatigue.unity
+    guid: e78b1f23de77564488adb703f2aa4c5d
+  - enabled: 1
+    path: Assets/Scenes/Issue/Obesity or Weight Management.unity
+    guid: 3e52f4bd25e01d34e81cdfc607606972
+  - enabled: 1
+    path: Assets/Scenes/Issue/Posture Problems.unity
+    guid: d45b35ffe4d9eea47b948bb2cc4df812
+  - enabled: 1
+    path: Assets/Scenes/Issue/Shoulder Pain.unity
+    guid: c02da6767f564fe4c84c12f1a60a324e
+  - enabled: 1
+    path: Assets/Scenes/Issue/Stress and Anxiety.unity
+    guid: 7d4403bf19da54a4a9a5d1f610dcce01
+  - enabled: 1
+    path: Assets/Scenes/Issue/Wrist Pain.unity
+    guid: 5ab87584a51ec78479201c9862833571
+  - enabled: 1
     path: Assets/Scenes/Trikonasana.unity
     guid: 4024eafe6722d344ea726152eeed2762
   - enabled: 1
@@ -80,6 +104,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Yoga.unity
     guid: 3f7969cb09c80bb4d9731f4635c07dbf
+  - enabled: 1
+    path: Assets/Scenes/Issue.unity
+    guid: a9b22fa0ceafe314eaa31402562d0484
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 6ee72d15cf39dd748a13eac57397b9af,
       type: 2}
