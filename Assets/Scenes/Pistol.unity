@@ -3076,7 +3076,10 @@ MonoBehaviour:
   timerText: {fileID: 2110326087}
   storage: {fileID: 0}
   yogaInstructionsAudio: {fileID: 1652124626}
+  sessionTime: 60
+  initialSessionTime: 60
   exerciseTime: 0
+  MET: 6.5
 --- !u!1 &2059878287
 GameObject:
   m_ObjectHideFlags: 0

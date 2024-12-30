@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class ARYogaSessionController : MonoBehaviour
 {
@@ -18,19 +17,22 @@ public class ARYogaSessionController : MonoBehaviour
     public Button deployButton, startButton, pauseButton, resetButton;
     public Text timerText;
 
-    //public WorkoutTimeDisplay workoutTime;
     public Storage storage;
+    private CalorieDisplay calorieDisplay;
 
     public AudioSource yogaInstructionsAudio;
     private Animator yogaTutorAnimator;
     private bool isPaused = false, sessionStarted = false, canPlaceObject = false, uiInteraction = false;
 
-    private float sessionTime = 60f;
-    public float exerciseTime = 0f;
+    public float sessionTime = 60f;
+    private float initialSessionTime;
+    private float exerciseTime = 0f;
+    public float MET = 8f;
 
     void Start()
     {
-        storage = GameObject.FindObjectOfType<Storage>();
+        storage = FindObjectOfType<Storage>();
+        calorieDisplay = FindObjectOfType<CalorieDisplay>();
 
         raycastManager = GetComponent<ARRaycastManager>();
 
@@ -42,8 +44,9 @@ public class ARYogaSessionController : MonoBehaviour
         resetButton.gameObject.SetActive(false);
         startButton.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(false);
-        //endScreen = GameObject.Find("End Screen");
         endScreen.SetActive(false);
+
+        initialSessionTime = sessionTime; // Store initial session time for resets
     }
 
     void Update()
@@ -81,7 +84,8 @@ public class ARYogaSessionController : MonoBehaviour
                 {
                     spawnedObject = Instantiate(yogaTutorPrefab, hitPose.position, hitPose.rotation);
                     yogaTutorAnimator = spawnedObject.GetComponent<Animator>();
-                    yogaTutorAnimator.speed = 0;
+                    if (yogaTutorAnimator != null)
+                        yogaTutorAnimator.speed = 0;
 
                     startButton.gameObject.SetActive(true);
                     resetButton.gameObject.SetActive(true);
@@ -105,11 +109,14 @@ public class ARYogaSessionController : MonoBehaviour
         if (spawnedObject != null) Destroy(spawnedObject);
 
         sessionStarted = false;
-        sessionTime = 60f;
+        sessionTime = initialSessionTime;
+        exerciseTime = 0;
+
         deployButton.gameObject.SetActive(true);
         startButton.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(false);
         resetButton.gameObject.SetActive(false);
+
         timerText.text = "";
     }
 
@@ -120,6 +127,7 @@ public class ARYogaSessionController : MonoBehaviour
         exerciseTime = 0;
         yogaTutorAnimator.speed = 1;
         StartCoroutine(PlayAudioWithDelay(15f));
+
         startButton.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(true);
 
@@ -136,23 +144,30 @@ public class ARYogaSessionController : MonoBehaviour
     void PauseSession()
     {
         isPaused = !isPaused;
-        yogaTutorAnimator.speed = isPaused ? 0 : 1;
+        if (yogaTutorAnimator != null)
+            yogaTutorAnimator.speed = isPaused ? 0 : 1;
 
-        if (isPaused) yogaInstructionsAudio.Pause();
-        else yogaInstructionsAudio.UnPause();
+        if (isPaused)
+            yogaInstructionsAudio.Pause();
+        else
+            yogaInstructionsAudio.UnPause();
     }
-      
+
     void EndSession()
     {
-        yogaTutorAnimator.speed = 0;
+        if (yogaTutorAnimator != null)
+            yogaTutorAnimator.speed = 0;
+
         yogaInstructionsAudio.Stop();
 
         storage.dailyTime += exerciseTime;
         storage.totalTime += exerciseTime;
-        //workoutTime.UpdateDisplayTime();
 
+        storage.dailyCalorieBurned += (MET * storage.playerWeight * 0.0175f * (exerciseTime / 60f)); // Corrected formula
         sessionStarted = false;
-        sessionTime = 60f;
+        sessionTime = initialSessionTime;
+
+        calorieDisplay.ShowCalorie(MET);
 
         endScreen.SetActive(true);
     }
